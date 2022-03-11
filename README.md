@@ -27,4 +27,4 @@
   - and more...
 
 ## Notes
-Don't bug me about the API key in the source code. I know it's there. It's for using ZAP locally, and only works while it's running on my test machine. Everything is fine. Cool your jets, hot stuff.
+Don't bug me about the API key in the source code. I know it's there. It's fine. It's for using ZAP locally, and only works while it's running on my test machine. Everything is fine. Cool your jets, hot stuff.
