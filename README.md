@@ -1,5 +1,7 @@
 # OWASP ZAP CLI in Ruby
 
+A ruby implementaiton of a CLI tool to programmatically interact with OWASP ZAP.
+
 ## Prerequisites
 
 - Ruby v2 or later
