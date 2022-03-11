@@ -1,0 +1,5332 @@
+{
+    "accessControl": {
+        "getScanProgress": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getScanStatus": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "scan": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "scanAsUnAuthUser",
+                    "required": false
+                },
+                {
+                    "name": "raiseAlert",
+                    "required": false
+                },
+                {
+                    "name": "alertRiskLevel",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "writeHTMLreport": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "fileName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "acsrf": {
+        "addOptionToken": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "genForm": {
+            "params": [
+                {
+                    "name": "hrefId",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
+        "optionPartialMatchingEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTokensNames": {
+            "params": [],
+            "type": "view"
+        },
+        "removeOptionToken": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionPartialMatchingEnabled": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "ajaxSpider": {
+        "addAllowedResource": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "allowedResources": {
+            "params": [],
+            "type": "view"
+        },
+        "fullResults": {
+            "params": [],
+            "type": "view"
+        },
+        "numberOfResults": {
+            "params": [],
+            "type": "view"
+        },
+        "optionBrowserId": {
+            "params": [],
+            "type": "view"
+        },
+        "optionClickDefaultElems": {
+            "params": [],
+            "type": "view"
+        },
+        "optionClickElemsOnce": {
+            "params": [],
+            "type": "view"
+        },
+        "optionEventWait": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxCrawlDepth": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxCrawlStates": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxDuration": {
+            "params": [],
+            "type": "view"
+        },
+        "optionNumberOfBrowsers": {
+            "params": [],
+            "type": "view"
+        },
+        "optionRandomInputs": {
+            "params": [],
+            "type": "view"
+        },
+        "optionReloadWait": {
+            "params": [],
+            "type": "view"
+        },
+        "removeAllowedResource": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "results": {
+            "params": [
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "scan": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "inScope",
+                    "required": false
+                },
+                {
+                    "name": "contextName",
+                    "required": false
+                },
+                {
+                    "name": "subtreeOnly",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "scanAsUser": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "userName",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "subtreeOnly",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setEnabledAllowedResource": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionBrowserId": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionClickDefaultElems": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionClickElemsOnce": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionEventWait": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxCrawlDepth": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxCrawlStates": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxDuration": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionNumberOfBrowsers": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionRandomInputs": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionReloadWait": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "status": {
+            "params": [],
+            "type": "view"
+        },
+        "stop": {
+            "params": [],
+            "type": "action"
+        }
+    },
+    "alert": {
+        "addAlert": {
+            "params": [
+                {
+                    "name": "messageId",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "riskId",
+                    "required": true
+                },
+                {
+                    "name": "confidenceId",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "param",
+                    "required": false
+                },
+                {
+                    "name": "attack",
+                    "required": false
+                },
+                {
+                    "name": "otherInfo",
+                    "required": false
+                },
+                {
+                    "name": "solution",
+                    "required": false
+                },
+                {
+                    "name": "references",
+                    "required": false
+                },
+                {
+                    "name": "evidence",
+                    "required": false
+                },
+                {
+                    "name": "cweId",
+                    "required": false
+                },
+                {
+                    "name": "wascId",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "alert": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "alertCountsByRisk": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "recurse",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "alerts": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                },
+                {
+                    "name": "riskId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "alertsByRisk": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "recurse",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "alertsSummary": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "deleteAlert": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "deleteAllAlerts": {
+            "params": [],
+            "type": "action"
+        },
+        "numberOfAlerts": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "riskId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "updateAlert": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "riskId",
+                    "required": true
+                },
+                {
+                    "name": "confidenceId",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "param",
+                    "required": false
+                },
+                {
+                    "name": "attack",
+                    "required": false
+                },
+                {
+                    "name": "otherInfo",
+                    "required": false
+                },
+                {
+                    "name": "solution",
+                    "required": false
+                },
+                {
+                    "name": "references",
+                    "required": false
+                },
+                {
+                    "name": "evidence",
+                    "required": false
+                },
+                {
+                    "name": "cweId",
+                    "required": false
+                },
+                {
+                    "name": "wascId",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "updateAlertsConfidence": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                },
+                {
+                    "name": "confidenceId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "updateAlertsRisk": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                },
+                {
+                    "name": "riskId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "alertFilter": {
+        "addAlertFilter": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "ruleId",
+                    "required": true
+                },
+                {
+                    "name": "newLevel",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "urlIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "parameter",
+                    "required": false
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                },
+                {
+                    "name": "parameterIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "attack",
+                    "required": false
+                },
+                {
+                    "name": "attackIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "evidence",
+                    "required": false
+                },
+                {
+                    "name": "evidenceIsRegex",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addGlobalAlertFilter": {
+            "params": [
+                {
+                    "name": "ruleId",
+                    "required": true
+                },
+                {
+                    "name": "newLevel",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "urlIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "parameter",
+                    "required": false
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                },
+                {
+                    "name": "parameterIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "attack",
+                    "required": false
+                },
+                {
+                    "name": "attackIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "evidence",
+                    "required": false
+                },
+                {
+                    "name": "evidenceIsRegex",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "alertFilterList": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "globalAlertFilterList": {
+            "params": [],
+            "type": "view"
+        },
+        "removeAlertFilter": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "ruleId",
+                    "required": true
+                },
+                {
+                    "name": "newLevel",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "urlIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "parameter",
+                    "required": false
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                },
+                {
+                    "name": "parameterIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "attack",
+                    "required": false
+                },
+                {
+                    "name": "attackIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "evidence",
+                    "required": false
+                },
+                {
+                    "name": "evidenceIsRegex",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "removeGlobalAlertFilter": {
+            "params": [
+                {
+                    "name": "ruleId",
+                    "required": true
+                },
+                {
+                    "name": "newLevel",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "urlIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "parameter",
+                    "required": false
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                },
+                {
+                    "name": "parameterIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "attack",
+                    "required": false
+                },
+                {
+                    "name": "attackIsRegex",
+                    "required": false
+                },
+                {
+                    "name": "evidence",
+                    "required": false
+                },
+                {
+                    "name": "evidenceIsRegex",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "ascan": {
+        "addExcludedParam": {
+            "params": [
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "required": false
+                },
+                {
+                    "name": "url",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addScanPolicy": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": true
+                },
+                {
+                    "name": "alertThreshold",
+                    "required": false
+                },
+                {
+                    "name": "attackStrength",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "alertsIds": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "attackModeQueue": {
+            "params": [],
+            "type": "view"
+        },
+        "clearExcludedFromScan": {
+            "params": [],
+            "type": "action"
+        },
+        "disableAllScanners": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "disableScanners": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "enableAllScanners": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "enableScanners": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "excludeFromScan": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "excludedFromScan": {
+            "params": [],
+            "type": "view"
+        },
+        "excludedParamTypes": {
+            "params": [],
+            "type": "view"
+        },
+        "excludedParams": {
+            "params": [],
+            "type": "view"
+        },
+        "importScanPolicy": {
+            "params": [
+                {
+                    "name": "path",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "messagesIds": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "modifyExcludedParam": {
+            "params": [
+                {
+                    "name": "idx",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": false
+                },
+                {
+                    "name": "type",
+                    "required": false
+                },
+                {
+                    "name": "url",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "optionAddQueryParam": {
+            "params": [],
+            "type": "view"
+        },
+        "optionAllowAttackOnStart": {
+            "params": [],
+            "type": "view"
+        },
+        "optionAttackPolicy": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDefaultPolicy": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDelayInMs": {
+            "params": [],
+            "type": "view"
+        },
+        "optionExcludedParamList": {
+            "params": [],
+            "type": "view"
+        },
+        "optionHandleAntiCSRFTokens": {
+            "params": [],
+            "type": "view"
+        },
+        "optionHostPerScan": {
+            "params": [],
+            "type": "view"
+        },
+        "optionInjectPluginIdInHeader": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxChartTimeInMins": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxResultsToList": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxRuleDurationInMins": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxScanDurationInMins": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxScansInUI": {
+            "params": [],
+            "type": "view"
+        },
+        "optionPromptInAttackMode": {
+            "params": [],
+            "type": "view"
+        },
+        "optionPromptToClearFinishedScans": {
+            "params": [],
+            "type": "view"
+        },
+        "optionRescanInAttackMode": {
+            "params": [],
+            "type": "view"
+        },
+        "optionScanHeadersAllRequests": {
+            "params": [],
+            "type": "view"
+        },
+        "optionShowAdvancedDialog": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTargetParamsEnabledRPC": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTargetParamsInjectable": {
+            "params": [],
+            "type": "view"
+        },
+        "optionThreadPerHost": {
+            "params": [],
+            "type": "view"
+        },
+        "pause": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "pauseAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "policies": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                },
+                {
+                    "name": "policyId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "removeAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "removeExcludedParam": {
+            "params": [
+                {
+                    "name": "idx",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeScan": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeScanPolicy": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "resume": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "resumeAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "scan": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "recurse",
+                    "required": false
+                },
+                {
+                    "name": "inScopeOnly",
+                    "required": false
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                },
+                {
+                    "name": "method",
+                    "required": false
+                },
+                {
+                    "name": "postData",
+                    "required": false
+                },
+                {
+                    "name": "contextId",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "scanAsUser": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "contextId",
+                    "required": false
+                },
+                {
+                    "name": "userId",
+                    "required": false
+                },
+                {
+                    "name": "recurse",
+                    "required": false
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                },
+                {
+                    "name": "method",
+                    "required": false
+                },
+                {
+                    "name": "postData",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "scanPolicyNames": {
+            "params": [],
+            "type": "view"
+        },
+        "scanProgress": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "scanners": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                },
+                {
+                    "name": "policyId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "scans": {
+            "params": [],
+            "type": "view"
+        },
+        "setEnabledPolicies": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionAddQueryParam": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionAllowAttackOnStart": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionAttackPolicy": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionDefaultPolicy": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionDelayInMs": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionHandleAntiCSRFTokens": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionHostPerScan": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionInjectPluginIdInHeader": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxChartTimeInMins": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxResultsToList": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxRuleDurationInMins": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxScanDurationInMins": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxScansInUI": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionPromptInAttackMode": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionPromptToClearFinishedScans": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionRescanInAttackMode": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionScanHeadersAllRequests": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionShowAdvancedDialog": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionTargetParamsEnabledRPC": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionTargetParamsInjectable": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionThreadPerHost": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setPolicyAlertThreshold": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                },
+                {
+                    "name": "alertThreshold",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setPolicyAttackStrength": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                },
+                {
+                    "name": "attackStrength",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setScannerAlertThreshold": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                },
+                {
+                    "name": "alertThreshold",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setScannerAttackStrength": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                },
+                {
+                    "name": "attackStrength",
+                    "required": true
+                },
+                {
+                    "name": "scanPolicyName",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "skipScanner": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                },
+                {
+                    "name": "scannerId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "status": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "stop": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "stopAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "updateScanPolicy": {
+            "params": [
+                {
+                    "name": "scanPolicyName",
+                    "required": true
+                },
+                {
+                    "name": "alertThreshold",
+                    "required": false
+                },
+                {
+                    "name": "attackStrength",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "authentication": {
+        "getAuthenticationMethod": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getAuthenticationMethodConfigParams": {
+            "params": [
+                {
+                    "name": "authMethodName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getLoggedInIndicator": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getLoggedOutIndicator": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getSupportedAuthenticationMethods": {
+            "params": [],
+            "type": "view"
+        },
+        "setAuthenticationMethod": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "authMethodName",
+                    "required": true
+                },
+                {
+                    "name": "authMethodConfigParams",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setLoggedInIndicator": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "loggedInIndicatorRegex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setLoggedOutIndicator": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "loggedOutIndicatorRegex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "authorization": {
+        "getAuthorizationDetectionMethod": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "setBasicAuthorizationDetectionMethod": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "headerRegex",
+                    "required": false
+                },
+                {
+                    "name": "bodyRegex",
+                    "required": false
+                },
+                {
+                    "name": "statusCode",
+                    "required": false
+                },
+                {
+                    "name": "logicalOperator",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "autoupdate": {
+        "downloadLatestRelease": {
+            "params": [],
+            "type": "action"
+        },
+        "installAddon": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "installedAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "isLatestVersion": {
+            "params": [],
+            "type": "view"
+        },
+        "latestVersionNumber": {
+            "params": [],
+            "type": "view"
+        },
+        "localAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "marketplaceAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "newAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "optionAddonDirectories": {
+            "params": [],
+            "type": "view"
+        },
+        "optionCheckAddonUpdates": {
+            "params": [],
+            "type": "view"
+        },
+        "optionCheckOnStart": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDayLastChecked": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDayLastInstallWarned": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDayLastUpdateWarned": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDownloadDirectory": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDownloadNewRelease": {
+            "params": [],
+            "type": "view"
+        },
+        "optionInstallAddonUpdates": {
+            "params": [],
+            "type": "view"
+        },
+        "optionInstallScannerRules": {
+            "params": [],
+            "type": "view"
+        },
+        "optionReportAlphaAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "optionReportBetaAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "optionReportReleaseAddons": {
+            "params": [],
+            "type": "view"
+        },
+        "setOptionCheckAddonUpdates": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionCheckOnStart": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionDownloadNewRelease": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionInstallAddonUpdates": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionInstallScannerRules": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionReportAlphaAddons": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionReportBetaAddons": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionReportReleaseAddons": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "uninstallAddon": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "updatedAddons": {
+            "params": [],
+            "type": "view"
+        }
+    },
+    "break": {
+        "addHttpBreakpoint": {
+            "params": [
+                {
+                    "name": "string",
+                    "required": true
+                },
+                {
+                    "name": "location",
+                    "required": true
+                },
+                {
+                    "name": "match",
+                    "required": true
+                },
+                {
+                    "name": "inverse",
+                    "required": true
+                },
+                {
+                    "name": "ignorecase",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "break": {
+            "params": [
+                {
+                    "name": "type",
+                    "required": true
+                },
+                {
+                    "name": "state",
+                    "required": true
+                },
+                {
+                    "name": "scope",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "continue": {
+            "params": [],
+            "type": "action"
+        },
+        "drop": {
+            "params": [],
+            "type": "action"
+        },
+        "httpMessage": {
+            "params": [],
+            "type": "view"
+        },
+        "isBreakAll": {
+            "params": [],
+            "type": "view"
+        },
+        "isBreakRequest": {
+            "params": [],
+            "type": "view"
+        },
+        "isBreakResponse": {
+            "params": [],
+            "type": "view"
+        },
+        "removeHttpBreakpoint": {
+            "params": [
+                {
+                    "name": "string",
+                    "required": true
+                },
+                {
+                    "name": "location",
+                    "required": true
+                },
+                {
+                    "name": "match",
+                    "required": true
+                },
+                {
+                    "name": "inverse",
+                    "required": true
+                },
+                {
+                    "name": "ignorecase",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setHttpMessage": {
+            "params": [
+                {
+                    "name": "httpHeader",
+                    "required": true
+                },
+                {
+                    "name": "httpBody",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "step": {
+            "params": [],
+            "type": "action"
+        },
+        "waitForHttpBreak": {
+            "params": [
+                {
+                    "name": "poll",
+                    "required": false
+                },
+                {
+                    "name": "keepalive",
+                    "required": false
+                }
+            ],
+            "type": "pconn"
+        }
+    },
+    "context": {
+        "context": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "contextList": {
+            "params": [],
+            "type": "view"
+        },
+        "excludeAllContextTechnologies": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "excludeContextTechnologies": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "technologyNames",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "excludeFromContext": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "regex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "excludeRegexs": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "excludedTechnologyList": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "exportContext": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "contextFile",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "importContext": {
+            "params": [
+                {
+                    "name": "contextFile",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "includeAllContextTechnologies": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "includeContextTechnologies": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "technologyNames",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "includeInContext": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "regex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "includeRegexs": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "includedTechnologyList": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "newContext": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeContext": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setContextCheckingStrategy": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "checkingStrategy",
+                    "required": true
+                },
+                {
+                    "name": "pollUrl",
+                    "required": false
+                },
+                {
+                    "name": "pollData",
+                    "required": false
+                },
+                {
+                    "name": "pollHeaders",
+                    "required": false
+                },
+                {
+                    "name": "pollFrequency",
+                    "required": false
+                },
+                {
+                    "name": "pollFrequencyUnits",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setContextInScope": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "booleanInScope",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setContextRegexs": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                },
+                {
+                    "name": "incRegexs",
+                    "required": true
+                },
+                {
+                    "name": "excRegexs",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "technologyList": {
+            "params": [],
+            "type": "view"
+        },
+        "urls": {
+            "params": [
+                {
+                    "name": "contextName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        }
+    },
+    "core": {
+        "accessUrl": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": true
+                },
+                {
+                    "name": "followRedirects",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addProxyChainExcludedDomain": {
+            "params": [
+                {
+                    "name": "value",
+                    "required": true
+                },
+                {
+                    "name": "isRegex",
+                    "required": false
+                },
+                {
+                    "name": "isEnabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "alert": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "alerts": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                },
+                {
+                    "name": "riskId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "alertsSummary": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "childNodes": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "clearExcludedFromProxy": {
+            "params": [],
+            "type": "action"
+        },
+        "deleteAlert": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "deleteAllAlerts": {
+            "params": [],
+            "type": "action"
+        },
+        "deleteSiteNode": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": true
+                },
+                {
+                    "name": "method",
+                    "required": false
+                },
+                {
+                    "name": "postData",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "disableAllProxyChainExcludedDomains": {
+            "params": [],
+            "type": "action"
+        },
+        "disableClientCertificate": {
+            "params": [],
+            "type": "action"
+        },
+        "enableAllProxyChainExcludedDomains": {
+            "params": [],
+            "type": "action"
+        },
+        "enablePKCS12ClientCertificate": {
+            "params": [
+                {
+                    "name": "filePath",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "required": true
+                },
+                {
+                    "name": "index",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "excludeFromProxy": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "excludedFromProxy": {
+            "params": [],
+            "type": "view"
+        },
+        "generateRootCA": {
+            "params": [],
+            "type": "action"
+        },
+        "homeDirectory": {
+            "params": [],
+            "type": "view"
+        },
+        "hosts": {
+            "params": [],
+            "type": "view"
+        },
+        "htmlreport": {
+            "params": [],
+            "type": "other"
+        },
+        "jsonreport": {
+            "params": [],
+            "type": "other"
+        },
+        "loadSession": {
+            "params": [
+                {
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "mdreport": {
+            "params": [],
+            "type": "other"
+        },
+        "message": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "messageHar": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
+        "messages": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "messagesById": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "messagesHar": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "messagesHarById": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
+        "mode": {
+            "params": [],
+            "type": "view"
+        },
+        "modifyProxyChainExcludedDomain": {
+            "params": [
+                {
+                    "name": "idx",
+                    "required": true
+                },
+                {
+                    "name": "value",
+                    "required": false
+                },
+                {
+                    "name": "isRegex",
+                    "required": false
+                },
+                {
+                    "name": "isEnabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "newSession": {
+            "params": [
+                {
+                    "name": "name",
+                    "required": false
+                },
+                {
+                    "name": "overwrite",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "numberOfAlerts": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "riskId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "numberOfMessages": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "optionAlertOverridesFilePath": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDefaultUserAgent": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDnsTtlSuccessfulQueries": {
+            "params": [],
+            "type": "view"
+        },
+        "optionHttpState": {
+            "params": [],
+            "type": "view"
+        },
+        "optionHttpStateEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaximumAlertInstances": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMergeRelatedAlerts": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainName": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainPassword": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainPort": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainPrompt": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainRealm": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainSkipName": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyChainUserName": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyExcludedDomains": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProxyExcludedDomainsEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionSingleCookieRequestHeader": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTimeoutInSecs": {
+            "params": [],
+            "type": "view"
+        },
+        "optionUseProxyChain": {
+            "params": [],
+            "type": "view"
+        },
+        "optionUseProxyChainAuth": {
+            "params": [],
+            "type": "view"
+        },
+        "optionUseSocksProxy": {
+            "params": [],
+            "type": "view"
+        },
+        "proxy.pac": {
+            "params": [],
+            "type": "other"
+        },
+        "proxyChainExcludedDomains": {
+            "params": [],
+            "type": "view"
+        },
+        "removeProxyChainExcludedDomain": {
+            "params": [
+                {
+                    "name": "idx",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "rootcert": {
+            "params": [],
+            "type": "other"
+        },
+        "runGarbageCollection": {
+            "params": [],
+            "type": "action"
+        },
+        "saveSession": {
+            "params": [
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "overwrite",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "sendHarRequest": {
+            "params": [
+                {
+                    "name": "request",
+                    "required": true
+                },
+                {
+                    "name": "followRedirects",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "sendRequest": {
+            "params": [
+                {
+                    "name": "request",
+                    "required": true
+                },
+                {
+                    "name": "followRedirects",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "sessionLocation": {
+            "params": [],
+            "type": "view"
+        },
+        "setHomeDirectory": {
+            "params": [
+                {
+                    "name": "dir",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setMode": {
+            "params": [
+                {
+                    "name": "mode",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionAlertOverridesFilePath": {
+            "params": [
+                {
+                    "name": "filePath",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionDefaultUserAgent": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionDnsTtlSuccessfulQueries": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionHttpStateEnabled": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaximumAlertInstances": {
+            "params": [
+                {
+                    "name": "numberOfInstances",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMergeRelatedAlerts": {
+            "params": [
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainName": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainPassword": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainPort": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainPrompt": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainRealm": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainSkipName": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProxyChainUserName": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionSingleCookieRequestHeader": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionTimeoutInSecs": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionUseProxyChain": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionUseProxyChainAuth": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionUseSocksProxy": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setproxy": {
+            "params": [
+                {
+                    "name": "proxy",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
+        "shutdown": {
+            "params": [],
+            "type": "action"
+        },
+        "sites": {
+            "params": [],
+            "type": "view"
+        },
+        "snapshotSession": {
+            "params": [
+                {
+                    "name": "name",
+                    "required": false
+                },
+                {
+                    "name": "overwrite",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "urls": {
+            "params": [
+                {
+                    "name": "baseurl",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "version": {
+            "params": [],
+            "type": "view"
+        },
+        "xmlreport": {
+            "params": [],
+            "type": "other"
+        },
+        "zapHomePath": {
+            "params": [],
+            "type": "view"
+        }
+    },
+    "forcedUser": {
+        "getForcedUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "isForcedUserModeEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "setForcedUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setForcedUserModeEnabled": {
+            "params": [
+                {
+                    "name": "boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "graphql": {
+        "importFile": {
+            "params": [
+                {
+                    "name": "endurl",
+                    "required": true
+                },
+                {
+                    "name": "file",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "importUrl": {
+            "params": [
+                {
+                    "name": "endurl",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "optionArgsType": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxArgsDepth": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxQueryDepth": {
+            "params": [],
+            "type": "view"
+        },
+        "optionOptionalArgsEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionQuerySplitType": {
+            "params": [],
+            "type": "view"
+        },
+        "optionRequestMethod": {
+            "params": [],
+            "type": "view"
+        },
+        "setOptionArgsType": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxArgsDepth": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxQueryDepth": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionOptionalArgsEnabled": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionQuerySplitType": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionRequestMethod": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "httpSessions": {
+        "activeSession": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "addDefaultSessionToken": {
+            "params": [
+                {
+                    "name": "sessionToken",
+                    "required": true
+                },
+                {
+                    "name": "tokenEnabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addSessionToken": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "sessionToken",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "createEmptySession": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "session",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "defaultSessionTokens": {
+            "params": [],
+            "type": "view"
+        },
+        "removeDefaultSessionToken": {
+            "params": [
+                {
+                    "name": "sessionToken",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeSession": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "session",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeSessionToken": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "sessionToken",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "renameSession": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "oldSessionName",
+                    "required": true
+                },
+                {
+                    "name": "newSessionName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "sessionTokens": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "sessions": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "session",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "setActiveSession": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "session",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setDefaultSessionTokenEnabled": {
+            "params": [
+                {
+                    "name": "sessionToken",
+                    "required": true
+                },
+                {
+                    "name": "tokenEnabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setSessionTokenValue": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "session",
+                    "required": true
+                },
+                {
+                    "name": "sessionToken",
+                    "required": true
+                },
+                {
+                    "name": "tokenValue",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "sites": {
+            "params": [],
+            "type": "view"
+        },
+        "unsetActiveSession": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "hud": {
+        "changesInHtml": {
+            "params": [],
+            "type": "other"
+        },
+        "getUiOption": {
+            "params": [
+                {
+                    "name": "key",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "heartbeat": {
+            "params": [],
+            "type": "view"
+        },
+        "hudAlertData": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "log": {
+            "params": [
+                {
+                    "name": "record",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "optionAllowUnsafeEval": {
+            "params": [],
+            "type": "view"
+        },
+        "optionBaseDirectory": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDevelopmentMode": {
+            "params": [],
+            "type": "view"
+        },
+        "optionEnableOnDomainMsgs": {
+            "params": [],
+            "type": "view"
+        },
+        "optionEnableTelemetry": {
+            "params": [],
+            "type": "view"
+        },
+        "optionEnabledForDaemon": {
+            "params": [],
+            "type": "view"
+        },
+        "optionEnabledForDesktop": {
+            "params": [],
+            "type": "view"
+        },
+        "optionInScopeOnly": {
+            "params": [],
+            "type": "view"
+        },
+        "optionRemoveCSP": {
+            "params": [],
+            "type": "view"
+        },
+        "optionShowWelcomeScreen": {
+            "params": [],
+            "type": "view"
+        },
+        "optionSkipTutorialTasks": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTutorialHost": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTutorialPort": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTutorialTasksDone": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTutorialTestMode": {
+            "params": [],
+            "type": "view"
+        },
+        "optionTutorialUpdates": {
+            "params": [],
+            "type": "view"
+        },
+        "recordRequest": {
+            "params": [
+                {
+                    "name": "header",
+                    "required": true
+                },
+                {
+                    "name": "body",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "resetTutorialTasks": {
+            "params": [],
+            "type": "action"
+        },
+        "setOptionBaseDirectory": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionDevelopmentMode": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionEnableOnDomainMsgs": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionEnableTelemetry": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionEnabledForDaemon": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionEnabledForDesktop": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionInScopeOnly": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionRemoveCSP": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionShowWelcomeScreen": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionSkipTutorialTasks": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionTutorialTaskDone": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionTutorialTestMode": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setUiOption": {
+            "params": [
+                {
+                    "name": "key",
+                    "required": true
+                },
+                {
+                    "name": "value",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "tutorialUpdates": {
+            "params": [],
+            "type": "view"
+        },
+        "upgradedDomains": {
+            "params": [],
+            "type": "view"
+        }
+    },
+    "importurls": {
+        "importurls": {
+            "params": [
+                {
+                    "name": "filePath",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "localProxies": {
+        "addAdditionalProxy": {
+            "params": [
+                {
+                    "name": "address",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "required": true
+                },
+                {
+                    "name": "behindNat",
+                    "required": false
+                },
+                {
+                    "name": "alwaysDecodeZip",
+                    "required": false
+                },
+                {
+                    "name": "removeUnsupportedEncodings",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "additionalProxies": {
+            "params": [],
+            "type": "view"
+        },
+        "removeAdditionalProxy": {
+            "params": [
+                {
+                    "name": "address",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "openapi": {
+        "importFile": {
+            "params": [
+                {
+                    "name": "file",
+                    "required": true
+                },
+                {
+                    "name": "target",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "importUrl": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": true
+                },
+                {
+                    "name": "hostOverride",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "params": {
+        "params": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        }
+    },
+    "pscan": {
+        "currentRule": {
+            "params": [],
+            "type": "view"
+        },
+        "disableAllScanners": {
+            "params": [],
+            "type": "action"
+        },
+        "disableAllTags": {
+            "params": [],
+            "type": "action"
+        },
+        "disableScanners": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "enableAllScanners": {
+            "params": [],
+            "type": "action"
+        },
+        "enableAllTags": {
+            "params": [],
+            "type": "action"
+        },
+        "enableScanners": {
+            "params": [
+                {
+                    "name": "ids",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "maxAlertsPerRule": {
+            "params": [],
+            "type": "view"
+        },
+        "recordsToScan": {
+            "params": [],
+            "type": "view"
+        },
+        "scanOnlyInScope": {
+            "params": [],
+            "type": "view"
+        },
+        "scanners": {
+            "params": [],
+            "type": "view"
+        },
+        "setEnabled": {
+            "params": [
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setMaxAlertsPerRule": {
+            "params": [
+                {
+                    "name": "maxAlerts",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setScanOnlyInScope": {
+            "params": [
+                {
+                    "name": "onlyInScope",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setScannerAlertThreshold": {
+            "params": [
+                {
+                    "name": "id",
+                    "required": true
+                },
+                {
+                    "name": "alertThreshold",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "quickstartlaunch": {
+        "startPage": {
+            "params": [],
+            "type": "other"
+        }
+    },
+    "replacer": {
+        "addRule": {
+            "params": [
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                },
+                {
+                    "name": "matchType",
+                    "required": true
+                },
+                {
+                    "name": "matchRegex",
+                    "required": true
+                },
+                {
+                    "name": "matchString",
+                    "required": true
+                },
+                {
+                    "name": "replacement",
+                    "required": false
+                },
+                {
+                    "name": "initiators",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "removeRule": {
+            "params": [
+                {
+                    "name": "description",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "rules": {
+            "params": [],
+            "type": "view"
+        },
+        "setEnabled": {
+            "params": [
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "bool",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "reveal": {
+        "reveal": {
+            "params": [],
+            "type": "view"
+        },
+        "setReveal": {
+            "params": [
+                {
+                    "name": "reveal",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "ruleConfig": {
+        "allRuleConfigs": {
+            "params": [],
+            "type": "view"
+        },
+        "resetAllRuleConfigValues": {
+            "params": [],
+            "type": "action"
+        },
+        "resetRuleConfigValue": {
+            "params": [
+                {
+                    "name": "key",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "ruleConfigValue": {
+            "params": [
+                {
+                    "name": "key",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "setRuleConfigValue": {
+            "params": [
+                {
+                    "name": "key",
+                    "required": true
+                },
+                {
+                    "name": "value",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "script": {
+        "clearGlobalCustomVar": {
+            "params": [
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "clearGlobalVar": {
+            "params": [
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "clearGlobalVars": {
+            "params": [],
+            "type": "action"
+        },
+        "clearScriptCustomVar": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                },
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "clearScriptVar": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                },
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "clearScriptVars": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "disable": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "enable": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "globalCustomVar": {
+            "params": [
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "globalCustomVars": {
+            "params": [],
+            "type": "view"
+        },
+        "globalVar": {
+            "params": [
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "globalVars": {
+            "params": [],
+            "type": "view"
+        },
+        "listEngines": {
+            "params": [],
+            "type": "view"
+        },
+        "listScripts": {
+            "params": [],
+            "type": "view"
+        },
+        "listTypes": {
+            "params": [],
+            "type": "view"
+        },
+        "load": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                },
+                {
+                    "name": "scriptType",
+                    "required": true
+                },
+                {
+                    "name": "scriptEngine",
+                    "required": true
+                },
+                {
+                    "name": "fileName",
+                    "required": true
+                },
+                {
+                    "name": "scriptDescription",
+                    "required": false
+                },
+                {
+                    "name": "charset",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "remove": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "runStandAloneScript": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "scriptCustomVar": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                },
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "scriptCustomVars": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "scriptVar": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                },
+                {
+                    "name": "varKey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "scriptVars": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "setGlobalVar": {
+            "params": [
+                {
+                    "name": "varKey",
+                    "required": true
+                },
+                {
+                    "name": "varValue",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setScriptVar": {
+            "params": [
+                {
+                    "name": "scriptName",
+                    "required": true
+                },
+                {
+                    "name": "varKey",
+                    "required": true
+                },
+                {
+                    "name": "varValue",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "search": {
+        "harByHeaderRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "harByRequestRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "harByResponseRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "harByUrlRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "messagesByHeaderRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "messagesByRequestRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "messagesByResponseRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "messagesByUrlRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "urlsByHeaderRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "urlsByRequestRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "urlsByResponseRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "urlsByUrlRegex": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        }
+    },
+    "selenium": {
+        "optionChromeDriverPath": {
+            "params": [],
+            "type": "view"
+        },
+        "optionFirefoxBinaryPath": {
+            "params": [],
+            "type": "view"
+        },
+        "optionFirefoxDriverPath": {
+            "params": [],
+            "type": "view"
+        },
+        "optionIeDriverPath": {
+            "params": [],
+            "type": "view"
+        },
+        "optionPhantomJsBinaryPath": {
+            "params": [],
+            "type": "view"
+        },
+        "setOptionChromeDriverPath": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionFirefoxBinaryPath": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionFirefoxDriverPath": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionIeDriverPath": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionPhantomJsBinaryPath": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "sessionManagement": {
+        "getSessionManagementMethod": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getSessionManagementMethodConfigParams": {
+            "params": [
+                {
+                    "name": "methodName",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getSupportedSessionManagementMethods": {
+            "params": [],
+            "type": "view"
+        },
+        "setSessionManagementMethod": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "methodName",
+                    "required": true
+                },
+                {
+                    "name": "methodConfigParams",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "soap": {
+        "importFile": {
+            "params": [
+                {
+                    "name": "file",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "importUrl": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    },
+    "spider": {
+        "addDomainAlwaysInScope": {
+            "params": [
+                {
+                    "name": "value",
+                    "required": true
+                },
+                {
+                    "name": "isRegex",
+                    "required": false
+                },
+                {
+                    "name": "isEnabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addedNodes": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "allUrls": {
+            "params": [],
+            "type": "view"
+        },
+        "clearExcludedFromScan": {
+            "params": [],
+            "type": "action"
+        },
+        "disableAllDomainsAlwaysInScope": {
+            "params": [],
+            "type": "action"
+        },
+        "domainsAlwaysInScope": {
+            "params": [],
+            "type": "view"
+        },
+        "enableAllDomainsAlwaysInScope": {
+            "params": [],
+            "type": "action"
+        },
+        "excludeFromScan": {
+            "params": [
+                {
+                    "name": "regex",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "excludedFromScan": {
+            "params": [],
+            "type": "view"
+        },
+        "fullResults": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "modifyDomainAlwaysInScope": {
+            "params": [
+                {
+                    "name": "idx",
+                    "required": true
+                },
+                {
+                    "name": "value",
+                    "required": false
+                },
+                {
+                    "name": "isRegex",
+                    "required": false
+                },
+                {
+                    "name": "isEnabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "optionAcceptCookies": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDomainsAlwaysInScope": {
+            "params": [],
+            "type": "view"
+        },
+        "optionDomainsAlwaysInScopeEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionHandleODataParametersVisited": {
+            "params": [],
+            "type": "view"
+        },
+        "optionHandleParameters": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxChildren": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxDepth": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxDuration": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxParseSizeBytes": {
+            "params": [],
+            "type": "view"
+        },
+        "optionMaxScansInUI": {
+            "params": [],
+            "type": "view"
+        },
+        "optionParseComments": {
+            "params": [],
+            "type": "view"
+        },
+        "optionParseGit": {
+            "params": [],
+            "type": "view"
+        },
+        "optionParseRobotsTxt": {
+            "params": [],
+            "type": "view"
+        },
+        "optionParseSVNEntries": {
+            "params": [],
+            "type": "view"
+        },
+        "optionParseSitemapXml": {
+            "params": [],
+            "type": "view"
+        },
+        "optionPostForm": {
+            "params": [],
+            "type": "view"
+        },
+        "optionProcessForm": {
+            "params": [],
+            "type": "view"
+        },
+        "optionRequestWaitTime": {
+            "params": [],
+            "type": "view"
+        },
+        "optionScope": {
+            "params": [],
+            "type": "view"
+        },
+        "optionScopeText": {
+            "params": [],
+            "type": "view"
+        },
+        "optionSendRefererHeader": {
+            "params": [],
+            "type": "view"
+        },
+        "optionShowAdvancedDialog": {
+            "params": [],
+            "type": "view"
+        },
+        "optionSkipURLString": {
+            "params": [],
+            "type": "view"
+        },
+        "optionThreadCount": {
+            "params": [],
+            "type": "view"
+        },
+        "optionUserAgent": {
+            "params": [],
+            "type": "view"
+        },
+        "pause": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "pauseAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "removeAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "removeDomainAlwaysInScope": {
+            "params": [
+                {
+                    "name": "idx",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeScan": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "results": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "resume": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "resumeAllScans": {
+            "params": [],
+            "type": "action"
+        },
+        "scan": {
+            "params": [
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "maxChildren",
+                    "required": false
+                },
+                {
+                    "name": "recurse",
+                    "required": false
+                },
+                {
+                    "name": "contextName",
+                    "required": false
+                },
+                {
+                    "name": "subtreeOnly",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "scanAsUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "required": false
+                },
+                {
+                    "name": "maxChildren",
+                    "required": false
+                },
+                {
+                    "name": "recurse",
+                    "required": false
+                },
+                {
+                    "name": "subtreeOnly",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "scans": {
+            "params": [],
+            "type": "view"
+        },
+        "setOptionAcceptCookies": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionHandleODataParametersVisited": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionHandleParameters": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxChildren": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxDepth": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxDuration": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxParseSizeBytes": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionMaxScansInUI": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionParseComments": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionParseGit": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionParseRobotsTxt": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionParseSVNEntries": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionParseSitemapXml": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionPostForm": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionProcessForm": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionRequestWaitTime": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionScopeString": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionSendRefererHeader": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionShowAdvancedDialog": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionSkipURLString": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionThreadCount": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionUserAgent": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "status": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "stop": {
+            "params": [
+                {
+                    "name": "scanId",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "stopAllScans": {
+            "params": [],
+            "type": "action"
+        }
+    },
+    "stats": {
+        "allSitesStats": {
+            "params": [
+                {
+                    "name": "keyPrefix",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "clearStats": {
+            "params": [
+                {
+                    "name": "keyPrefix",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "optionInMemoryEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionStatsdEnabled": {
+            "params": [],
+            "type": "view"
+        },
+        "optionStatsdHost": {
+            "params": [],
+            "type": "view"
+        },
+        "optionStatsdPort": {
+            "params": [],
+            "type": "view"
+        },
+        "optionStatsdPrefix": {
+            "params": [],
+            "type": "view"
+        },
+        "setOptionInMemoryEnabled": {
+            "params": [
+                {
+                    "name": "Boolean",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionStatsdHost": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionStatsdPort": {
+            "params": [
+                {
+                    "name": "Integer",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setOptionStatsdPrefix": {
+            "params": [
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "siteStats": {
+            "params": [
+                {
+                    "name": "site",
+                    "required": true
+                },
+                {
+                    "name": "keyPrefix",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "stats": {
+            "params": [
+                {
+                    "name": "keyPrefix",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        }
+    },
+    "users": {
+        "authenticateAsUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "getAuthenticationCredentials": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getAuthenticationCredentialsConfigParams": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getAuthenticationSession": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getAuthenticationState": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getUserById": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "newUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "pollAsUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeUser": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setAuthenticationCredentials": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "authCredentialsConfigParams",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setAuthenticationState": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "lastPollResult",
+                    "required": false
+                },
+                {
+                    "name": "lastPollTimeInMs",
+                    "required": false
+                },
+                {
+                    "name": "requestsSinceLastPoll",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setCookie": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "domain",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "value",
+                    "required": true
+                },
+                {
+                    "name": "path",
+                    "required": false
+                },
+                {
+                    "name": "secure",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setUserEnabled": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setUserName": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "usersList": {
+            "params": [
+                {
+                    "name": "contextId",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        }
+    },
+    "websocket": {
+        "breakTextMessage": {
+            "params": [],
+            "type": "view"
+        },
+        "channels": {
+            "params": [],
+            "type": "view"
+        },
+        "message": {
+            "params": [
+                {
+                    "name": "channelId",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "messages": {
+            "params": [
+                {
+                    "name": "channelId",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                },
+                {
+                    "name": "payloadPreviewLength",
+                    "required": false
+                }
+            ],
+            "type": "view"
+        },
+        "sendTextMessage": {
+            "params": [
+                {
+                    "name": "channelId",
+                    "required": true
+                },
+                {
+                    "name": "outgoing",
+                    "required": true
+                },
+                {
+                    "name": "message",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setBreakTextMessage": {
+            "params": [
+                {
+                    "name": "message",
+                    "required": true
+                },
+                {
+                    "name": "outgoing",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        }
+    }
+}
