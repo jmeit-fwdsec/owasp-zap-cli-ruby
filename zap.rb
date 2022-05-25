@@ -22,7 +22,8 @@ class ZapScan
     addons: [],
     skip_auth: false,
     auth_token_duration: 300,
-    custom_auth_script_file: '/home/repo/zap/auth.sh'
+    auth_script_file: '/home/repo/zap/auth.sh',
+    auth_headers: [{'header'=>'Authorization','value_prefix'=>'Bearer '}]
   )
 
     testing_zap_key = zap_api_key[0..3] == 'cs5p'
@@ -37,7 +38,8 @@ class ZapScan
     # Authentication config
     @skip_auth = skip_auth
     @auth_token_duration = auth_token_duration
-    @custom_auth_script_file = custom_auth_script_file
+    @auth_script_file = auth_script_file
+    @auth_headers = auth_headers
 
     # API files for openapi/swagger or postman
     @api_files_dir = api_files_dir
@@ -204,13 +206,13 @@ class ZapScan
 
     puts '# Fetching new auth token'
 
-    if File.exist?( @custom_auth_script_file )
+    if File.exist?( @auth_script_file )
       valid_filename = /^[a-zA-Z0-9_-]+\.sh$/
-      if not valid_filename.match?( File.basename( @custom_auth_script_file ) )
+      if not valid_filename.match?( File.basename( @auth_script_file ) )
         return false
       end
 
-      result = Open3.capture3( "bash #{@custom_auth_script_file}" )
+      result = Open3.capture3( "bash #{@auth_script_file}" )
       token = result[0]
 
     else
@@ -225,22 +227,27 @@ class ZapScan
         raise 'There was a problem fetching the auth token. ZAP scan has been canceled.'
       end
     end
-    
-    auth = "Bearer #{token}"
-    
-    zap.replacer_removeRule( description: 'Authorization' )
-    zap.replacer_addRule(
-      description: 'Authorization',
-      enabled: true,
-      matchType: 'REQ_HEADER',
-      matchRegex: true,
-      matchString: 'Authorization',
-      replacement: auth
-    )
-    
-    puts 'Done.'
 
-    true
+    @auth_headers.each do |hdr|
+    
+      value_prefix = hdr.key?(value_prefix) ? hdr.value_prefix : ''
+      value_suffix = hdr.key?(value_suffix) ? hdr.value_suffix : ''
+      auth = "#{hdr.value_prefix}#{token}#{value_suffix}"
+      
+      zap.replacer_removeRule( description: 'custom_auth' )
+      zap.replacer_addRule(
+        description: 'custom_auth',
+        enabled: true,
+        matchType: 'REQ_HEADER',
+        matchRegex: true,
+        matchString: hdr.header,
+        replacement: auth
+      )
+    end
+    
+    puts 'Auth token refreshed'
+
+    return true
   end
 
   def get_auth_token( login_url, body_format, credentials )
