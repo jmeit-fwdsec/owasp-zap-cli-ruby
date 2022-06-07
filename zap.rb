@@ -26,7 +26,7 @@ class ZapScan
     auth_headers: [{'header'=>'Authorization','value_prefix'=>'Bearer '}]
   )
 
-    testing_zap_key = zap_api_key[0..3] == 'cs5p'
+    testing_zap_key = zap_api_key[0..3] == 'o42g'
     @code_dir = testing_zap_key ? '.' : '/tmp/client-config'
 
     # project config
@@ -230,9 +230,9 @@ class ZapScan
 
     @auth_headers.each do |hdr|
     
-      value_prefix = hdr.key?(value_prefix) ? hdr.value_prefix : ''
-      value_suffix = hdr.key?(value_suffix) ? hdr.value_suffix : ''
-      auth = "#{hdr.value_prefix}#{token}#{value_suffix}"
+      value_prefix = hdr.key?('value_prefix') ? hdr['value_prefix'] : ''
+      value_suffix = hdr.key?('value_suffix') ? hdr['value_suffix'] : ''
+      auth = "#{value_prefix}#{token}#{value_suffix}"
       
       zap.replacer_removeRule( description: 'custom_auth' )
       zap.replacer_addRule(
@@ -240,7 +240,7 @@ class ZapScan
         enabled: true,
         matchType: 'REQ_HEADER',
         matchRegex: true,
-        matchString: hdr.header,
+        matchString: hdr['header'],
         replacement: auth
       )
     end
@@ -270,7 +270,7 @@ class ZapScan
     body = JSON.parse(res.body)
 
     begin
-      body['Token']
+      body['authentication']['token']
     rescue
       raise 'Failed to get token'
     end

@@ -29,8 +29,8 @@ enforced_scanners:
 scanner_configs:
   Zap:
      # Paths are relative to your repo
-     api_files_dir: "graphql-files"
-     api_files_type: "graphql" # Default: "openapi" -- Options: "openapi", "swagger" (alias for "openapi"), "postman", "graphql"
-     context_file: "eureka/zap/test.context"
-     policy_file: "eureka/zap/test.policy"
-     custom_auth_script_file: "eureka/zap/auth.sh"
+     api_files_dir: "zap"
+     api_files_type: "swagger" # Default: "openapi" -- Options: "openapi", "swagger" (alias for "openapi"), "postman", "graphql"
+     context_file: "zap/juiceShop.context"
+     policy_file: "zap/Default Policy.policy"
+     #custom_auth_script_file: "zap/auth.sh"
