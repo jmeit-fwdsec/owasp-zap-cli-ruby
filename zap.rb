@@ -207,12 +207,12 @@ class ZapScan
     puts '# Fetching new auth token'
 
     if File.exist?( @auth_script_file )
-      valid_filename = /^[a-zA-Z0-9_-]+\.sh$/
+      valid_filename = /^[a-zA-Z0-9_-]+\.(sh|py)$/
       if not valid_filename.match?( File.basename( @auth_script_file ) )
         return false
       end
 
-      result = Open3.capture3( "bash #{@auth_script_file}" )
+      result = Open3.capture3( "./#{@auth_script_file}" )
       token = result[0].strip
 
     else
