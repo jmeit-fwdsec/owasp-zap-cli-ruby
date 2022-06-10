@@ -17,5 +17,6 @@ zap = ZapScan.new(
     skip_auth: zap_config['skip_auth'],
     auth_token_duration: 300 - 10, #5min w/ a 10s buffer
     auth_script_file: zap_config['auth_script_file']
+    auth_headers: zap_config['auth_headers']
 )
 zap.start

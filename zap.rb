@@ -213,7 +213,7 @@ class ZapScan
       end
 
       result = Open3.capture3( "bash #{@auth_script_file}" )
-      token = result[0]
+      token = result[0].strip
 
     else
       # Get users in context
