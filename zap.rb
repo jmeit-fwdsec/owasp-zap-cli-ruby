@@ -53,8 +53,8 @@ class ZapScan
 
 
     # Export Report files Locations
-    @xml_report_file = testing_zap_key ? './report.xml' : '/home/repo/eureka/reports/zap.xml'
-    @html_report_file = testing_zap_key ? './report.html' : '/home/repo/eureka/reports/zap.html'
+    @xml_report_file = ENV['EUREKA_DOCKER'] ? './report.xml' : '/home/repo/eureka/reports/zap.xml'
+    @html_report_file = ENV['EUREKA_DOCKER'] ? './report.html' : '/home/repo/eureka/reports/zap.html'
 
     # ZAP config
     @zap_bin = zap_bin
@@ -144,7 +144,8 @@ class ZapScan
 
 
   def run_newman( api_url, pm_collection, pm_environment )
-    command = [ "HTTPS_PROXY=http://#{@zap_host}:#{@zap_port} newman run #{pm_collection} -e #{pm_environment} --reporters cli --insecure --global-var \"baseUrl=#{api_url}\"" ]
+    
+    command = [ "#{URI(api_url).scheme.upcase}_PROXY=http://#{@zap_host}:#{@zap_port} newman run \"#{pm_collection}\" -e \"#{pm_environment}\" --reporters cli --insecure --global-var \"baseUrl=#{api_url}\"" ]
 
     Open3.popen3(*command) do |stdin, stdout, stderr, wait_thread|
       #Thread.new do
