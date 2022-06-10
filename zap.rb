@@ -1,9 +1,11 @@
-require './owasp_zap_ruby'
+CODE_DIR = ENV['EUREKA_DOCKER'] ? '/tmp/client-config' : '.'
+
+require "#{CODE_DIR}/owasp_zap_ruby"
 require 'json'
 require 'fileutils'
 require 'open3'
 require 'concurrent'
-require './progressbar'
+require "#{CODE_DIR}/progressbar"
 require 'rexml/document'
 include REXML
 
@@ -25,9 +27,6 @@ class ZapScan
     auth_script_file: '/home/repo/zap/auth.sh',
     auth_headers: [{'header'=>'Authorization','value_prefix'=>'Bearer '}]
   )
-
-    testing_zap_key = zap_api_key[0..3] == 'cs5p'
-    @code_dir = testing_zap_key ? '.' : '/tmp/client-config'
 
     # project config
     @policy_file = policy_file
@@ -230,9 +229,9 @@ class ZapScan
 
     @auth_headers.each do |hdr|
     
-      value_prefix = hdr.key?(value_prefix) ? hdr.value_prefix : ''
-      value_suffix = hdr.key?(value_suffix) ? hdr.value_suffix : ''
-      auth = "#{hdr.value_prefix}#{token}#{value_suffix}"
+      value_prefix = hdr.key?('value_prefix') ? hdr['value_prefix'] : ''
+      value_suffix = hdr.key?('value_suffix') ? hdr['value_suffix'] : ''
+      auth = "#{value_prefix}#{token}#{value_suffix}"
       
       zap.replacer_removeRule( description: 'custom_auth' )
       zap.replacer_addRule(
@@ -240,7 +239,7 @@ class ZapScan
         enabled: true,
         matchType: 'REQ_HEADER',
         matchRegex: true,
-        matchString: hdr.header,
+        matchString: hdr['header'],
         replacement: auth
       )
     end
@@ -287,7 +286,7 @@ class ZapScan
       zap_host: @zap_host,
       zap_port: @zap_port,
       zap_bin: @zap_bin,
-      zap_api_defs: "#{@code_dir}/zap-api.json"
+      zap_api_defs: "#{CODE_DIR}/zap-api.json"
     )
     
     begin
