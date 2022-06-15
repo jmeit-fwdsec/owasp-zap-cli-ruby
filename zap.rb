@@ -13,7 +13,7 @@ class ZapScan
 
   def initialize(
     zap_bin: '/zap/zap.sh',
-    zap_host: 'localhost',
+    zap_host: '127.0.0.1', # Using 'localhost' can sometimes default to ipv6, which doesn't work with Zap.
     zap_port: '8080',
     zap_api_key: '123456789',
     zap_home_dir: '/home/repo/eureka/run/zap',
