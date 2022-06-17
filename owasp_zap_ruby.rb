@@ -7,7 +7,7 @@ module OwaspZapAPI
 
     class Zap
 
-        def initialize( zap_bin: '/zap/zap.sh', zap_host: 'localhost', zap_port: '8081', zap_api_key: '12345678', zap_api_defs: './zap-api.json' )
+        def initialize( zap_bin: '/zap/zap.sh', zap_host: 'localhost', zap_port: '8081', zap_api_key: '12345678', zap_api_defs: "#{__dir__}/zap-api.json" )
 
             api_json = File.read( zap_api_defs )
             @api = JSON.parse( api_json )

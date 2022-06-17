@@ -1,11 +1,9 @@
-CODE_DIR = ENV['EUREKA_DOCKER'] ? '/tmp/client-config' : '.'
-
-require "#{CODE_DIR}/owasp_zap_ruby"
+require "#{__dir__}/owasp_zap_ruby"
 require 'json'
 require 'fileutils'
 require 'open3'
 require 'concurrent'
-require "#{CODE_DIR}/progressbar"
+require "#{__dir__}/progressbar"
 require 'rexml/document'
 include REXML
 
@@ -17,6 +15,8 @@ class ZapScan
     zap_port: '8080',
     zap_api_key: '123456789',
     zap_home_dir: '/home/repo/eureka/run/zap',
+    zap_api_defs: "#{__dir__}/zap-api.json",
+    output_dir: __dir__,
     api_files_dir: '/home/repo/zap/swagger',
     api_files_type: 'openapi',
     policy_file: '/home/repo/zap/zap.policy',
@@ -53,14 +53,15 @@ class ZapScan
 
 
     # Export Report files Locations
-    @xml_report_file = ENV['EUREKA_DOCKER'] ? './report.xml' : '/home/repo/eureka/reports/zap.xml'
-    @html_report_file = ENV['EUREKA_DOCKER'] ? './report.html' : '/home/repo/eureka/reports/zap.html'
+    @xml_report_file = "#{output_dir}/zap-report.xml"
+    @html_report_file = "#{output_dir}/zap-report.html"
 
     # ZAP config
     @zap_bin = zap_bin
     @zap_port = zap_port
     @zap_api_key = zap_api_key
     @zap_host = zap_host
+    @zap_api_defs = zap_api_defs
     @addons = addons
 
     @zap_home_dir = File.expand_path( zap_home_dir )
@@ -287,7 +288,7 @@ class ZapScan
       zap_host: @zap_host,
       zap_port: @zap_port,
       zap_bin: @zap_bin,
-      zap_api_defs: "#{CODE_DIR}/zap-api.json"
+      zap_api_defs: @zap_api_defs
     )
     
     begin
