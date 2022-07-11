@@ -7,9 +7,10 @@ config = YAML.load( config_file )
 zap_config = config['scanner_configs']['Zap']
 
 zap = ZapScan.new(
-    zap_home_dir: '/private/tmp/',#'eureka/zap',
+    zap_home_dir: '/private/tmp', #"#{__dir__}/eureka/zap/home",
     zap_api_key: 'cs5pvv51qmcp3srlenbs7kms3b', 
     zap_port: '8081',
+    output_dir: "#{__dir__}/eureka/reports",
     api_files_dir: zap_config['api_files_dir'],
     api_files_type: zap_config['api_files_type'],
     context_file: zap_config['context_file'],

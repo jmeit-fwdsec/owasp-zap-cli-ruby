@@ -53,8 +53,7 @@ class ZapScan
 
 
     # Export Report files Locations
-    @xml_report_file = "#{output_dir}/zap-report.xml"
-    @html_report_file = "#{output_dir}/zap-report.html"
+    @output_dir = output_dir
 
     # ZAP config
     @zap_bin = zap_bin
@@ -368,17 +367,35 @@ class ZapScan
   end
 
 
-  def write_reports(zap)
+  def write_reports( zap, output_dir )
   
     puts 'Exporting reports'
-  
-    f = File.new( @xml_report_file, 'w+' )
-    f.write( zap.core_xmlreport )
-    f.close
     
-    f2 = File.new( @html_report_file, 'w+' )
-    f2.write( zap.core_htmlreport )
-    f2.close
+    # TODO: Add configurable severities and confidences to appear in report. The API offers these as params.
+    zap.reports_generate(
+      title: "ZAP Scanning Report - Modern",
+      template: "modern", #"risk-confidence-html",
+      theme: "marketing", #"original",
+      reportFileNamePattern: "{{yyyy-MM-dd}}-ZAP-Report_Modern-[[site]]",
+      reportDir: output_dir,
+      display: "false"
+    )
+
+    zap.reports_generate(
+      title: "ZAP Scanning Report - Risk-Confidence",
+      template: "risk-confidence-html",
+      theme: "original",
+      reportFileNamePattern: "{{yyyy-MM-dd}}-ZAP-Report_Risk-Confidence-[[site]]",
+      reportDir: output_dir,
+      display: "false"
+    )
+
+    zap.reports_generate(
+      title: "ZAP Scanning Report JSON",
+      template: "traditional-json-plus",
+      reportDir: output_dir,
+      display: "false"
+    )
     
     puts 'Done.'
   end
@@ -470,7 +487,7 @@ class ZapScan
     end
 
     # Export results
-    write_reports(zap)
+    write_reports( zap, @output_dir )
 
     puts 'Scan Finished!'
 

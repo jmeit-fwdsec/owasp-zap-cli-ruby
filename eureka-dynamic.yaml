@@ -28,9 +28,14 @@ enforced_scanners:
 
 scanner_configs:
   Zap:
-     # Paths are relative to your repo
-     api_files_dir: "graphql-files"
-     api_files_type: "graphql" # Default: "openapi" -- Options: "openapi", "swagger" (alias for "openapi"), "postman", "graphql"
-     context_file: "eureka/zap/test.context"
-     policy_file: "eureka/zap/test.policy"
-     custom_auth_script_file: "eureka/zap/auth.sh"
+    # Paths are relative to your repo
+    api_files_dir: "postman-files"
+    api_files_type: "postman" # Default: "openapi" -- Options: "openapi", "swagger" (alias for "openapi"), "postman", "graphql"
+    context_file: "eureka/finnai/finnai.context"
+    policy_file: "eureka/finnai/finnai.policy"
+    skip_auth: true
+    # auth_script_file: "eureka/zap/basic_login.py"
+    # auth_headers:
+    #   - header: "Cookie"
+    #     value_prefix: "PHPSESSID="
+    #     value_suffix: ";"
