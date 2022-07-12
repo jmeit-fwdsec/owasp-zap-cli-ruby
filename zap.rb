@@ -212,7 +212,7 @@ class ZapScan
         return false
       end
 
-      result = Open3.capture3( "./#{@auth_script_file}" )
+      result = Open3.capture3( @auth_script_file )
       token = result[0].strip
 
     else
