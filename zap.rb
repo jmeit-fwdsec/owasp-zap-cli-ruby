@@ -206,13 +206,20 @@ class ZapScan
 
     puts '# Fetching new auth token'
 
+    cmds = {
+      "py"=> "python3",
+      "sh"=> "bash"
+    }
+
     if File.exist?( @auth_script_file )
-      valid_filename = /^[a-zA-Z0-9_-]+\.(sh|py)$/
+      valid_filename = /^[a-zA-Z0-9_-]+\.(#{cmds.keys.join('|')})$/
       if not valid_filename.match?( File.basename( @auth_script_file ) )
         return false
       end
+      
+      auth_script_file_ext = File.extname( @auth_script_file )[1..-1]
 
-      result = Open3.capture3( @auth_script_file )
+      result = Open3.capture3( "#{cmds[auth_script_file_ext]} #{@auth_script_file}" )
       token = result[0].strip
 
     else
