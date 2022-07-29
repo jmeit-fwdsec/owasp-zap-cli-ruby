@@ -1,7 +1,7 @@
 require 'yaml'
 require './zap'
 
-config_file = File.read( './eureka-dynamic.yaml' )
+config_file = File.read( './vulnapp/juiceshop-zap/eureka-dynamic-native.yaml' )
 config = YAML.load( config_file )
 
 zap_config = config['scanner_configs']['Zap']

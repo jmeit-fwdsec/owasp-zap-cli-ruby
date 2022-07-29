@@ -184,8 +184,17 @@ class ZapScan
 
 
   def get_api_host_url(zap, _ctx_id)
-    in_scope = zap.context_includeRegexs( contextName: @context_name )['includeRegexs']
-    in_scope[0]
+    
+    target_host = ENV['TARGET_HOST']
+    if not ENV.keys.include? 'TARGET_HOST' or target_host.empty?
+      in_scope = zap.context_includeRegexs( contextName: @context_name )['includeRegexs']
+      target_host = in_scope[0]
+    else
+      in_scope = zap.context_includeInContext( regex: target_host, contextName: @context_name )
+    end
+
+    puts( "Target Host: #{target_host}" )
+    target_host
   end
 
 
@@ -327,14 +336,15 @@ class ZapScan
     puts 'Beginning active scan...'
 
     if File.exist?( @policy_file )
+      puts( "Importing Policy: #{@policy_name}" )
       zap.ascan_importScanPolicy( path: "#{@zap_home_dir}/policies/#{File.basename(@policy_file)}" )
     end
 
     zap.ascan_enableAllScanners( scanPolicyName: @policy_name )
     
-    active_scan_id = zap.ascan_scan( contextId: ctx_id )['scan']
+    active_scan_id = zap.ascan_scan( contextId: ctx_id, scanPolicyName: @policy_name )
 
-    active_scan_id
+    active_scan_id['scan']
 
   end
 
@@ -362,7 +372,8 @@ class ZapScan
             break
           end
         end
-    end
+
+      end
 
       bar.update zap.ascan_status( scandId: scan_id )['status'].to_f
       sleep 1
@@ -378,32 +389,45 @@ class ZapScan
   
     puts 'Exporting reports'
     
+    FileUtils.mkdir_p( 'eureka/reports' )
+    timestamp = Time.now.strftime("%s")
+    
     # TODO: Add configurable severities and confidences to appear in report. The API offers these as params.
+    report_filename = "zap-report-#{timestamp}"
     zap.reports_generate(
       title: "ZAP Scanning Report - Modern",
       template: "modern", #"risk-confidence-html",
       theme: "marketing", #"original",
-      reportFileNamePattern: "{{yyyy-MM-dd}}-ZAP-Report_Modern-[[site]]",
-      reportDir: output_dir,
+      reportFileName: "#{report_filename}.html",
+      reportDir: @zap_home_dir,
       display: "false"
     )
+    # Zap can only write reports to it's home folder. This moves it to the proper output folder.
+    FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
+    FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
 
+    report_filename = "zap-risk-report-#{timestamp}"
     zap.reports_generate(
       title: "ZAP Scanning Report - Risk-Confidence",
       template: "risk-confidence-html",
       theme: "original",
-      reportFileNamePattern: "{{yyyy-MM-dd}}-ZAP-Report_Risk-Confidence-[[site]]",
-      reportDir: output_dir,
+      reportFileName: "#{report_filename}.html",
+      reportDir: @zap_home_dir,
       display: "false"
     )
+    FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
+    FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
 
+    report_filename = "zap-report-#{timestamp}.json"
     zap.reports_generate(
       title: "ZAP Scanning Report JSON",
       template: "traditional-json-plus",
-      reportDir: output_dir,
+      reportFileName: report_filename,
+      reportDir: @zap_home_dir,
       display: "false"
     )
-    
+    FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
+
     puts 'Done.'
   end
 
