@@ -228,7 +228,11 @@ class ZapScan
       
       auth_script_file_ext = File.extname( @auth_script_file )[1..-1]
 
-      result = Open3.capture3( "#{cmds[auth_script_file_ext]} #{@auth_script_file}" )
+      if @auth_username or @auth_password
+        auth_args = " --username #{@auth_username} --password #{@auth_password}"
+      end
+
+      result = Open3.capture3( "#{cmds[auth_script_file_ext]} #{@auth_script_file} #{auth_args}" )
       token = result[0].strip
 
     else
