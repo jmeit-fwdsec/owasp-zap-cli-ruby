@@ -258,6 +258,7 @@ class ZapScan
 
     puts '# Fetching new auth token'
 
+    token = ""
     cmds = {
       "py"=> "python3",
       "sh"=> "bash"
@@ -386,7 +387,7 @@ class ZapScan
     zap.ascan_enableAllScanners( scanPolicyName: @policy_name )
     
     active_scan_id = 0
-    if( @skip_auth || @api_files_type != 'none' )
+    if( @skip_auth || !@auth_script_file || !File.exist?( @auth_script_file ) ) #TODO: Add a more comprehensive condition. Might require a new init param: auth_type
       active_scan_id = zap.ascan_scan( contextId: ctx_id, scanPolicyName: @policy_name )
     else
       user = zap.users_usersList( contextId: ctx_id )['usersList'][0]
