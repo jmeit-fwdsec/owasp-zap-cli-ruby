@@ -9,63 +9,68 @@ include REXML
 
 class ZapScan
 
-  def initialize(
-    zap_bin: '/zap/zap.sh',
-    zap_host: '127.0.0.1', # Using 'localhost' can sometimes default to ipv6, which doesn't work with Zap.
-    zap_port: '8080',
-    zap_api_key: '123456789',
-    zap_home_dir: '/home/repo/eureka/run/zap',
-    zap_api_defs: "#{__dir__}/zap-api.json",
-    output_dir: __dir__,
-    api_files_dir: '/home/repo/zap/swagger',
-    api_files_type: 'openapi',
-    policy_file: '/home/repo/zap/zap.policy',
-    context_file: '/home/repo/zap/zap.context',
-    addons: [],
-    skip_auth: false,
-    auth_token_duration: 300,
-    auth_script_file: '/home/repo/zap/auth.sh',
-    auth_headers: [{'header'=>'Authorization','value_prefix'=>'Bearer '}],
-    report_html: false
-  )
+  def initialize( opts: {} )
+
+    defaults = {
+      'zap_bin' => '/zap/zap.sh',
+      'zap_host' => '127.0.0.1', # Using 'localhost' can sometimes default to ipv6, which doesn't work with Zap.
+      'zap_port' => '8080',
+      'zap_api_key' => '123456789',
+      'zap_home_dir' => '/home/repo/eureka/run/zap',
+      'zap_api_defs' => "#{__dir__}/zap-api.json",
+      'output_dir' => __dir__,
+      'api_files_dir' => '/home/repo/zap/swagger',
+      'api_files_type' => 'none', # Eureka default -> 'openapi'
+      'policy_file' => '/home/repo/zap/zap.policy',
+      'context_file' => '/home/repo/zap/zap.context',
+      'addons' => [],
+      'skip_auth' => false,
+      'auth_token_duration' => 300,
+      'auth_script_file' => false, # Eureka default -> '/home/repo/zap/auth.sh'
+      'auth_headers' => [], # Eureka default -> [{'header'=>'Authorization','value_prefix'=>'Bearer '}]
+      'report_html' => false
+    }
+
+    opts = defaults.merge( opts )
 
     # project config
-    @policy_file = policy_file
-    @policy_name = get_name_from_xml policy_file, 'policy'
-    @context_file = context_file
-    @context_name = get_name_from_xml context_file, 'context'
+    @policy_file = opts['policy_file']
+    @policy_name = get_name_from_xml @policy_file, 'policy'
+    @context_file = opts['context_file']
+    @context_name = get_name_from_xml @context_file, 'context'
 
     # Authentication config
-    @skip_auth = skip_auth
-    @auth_token_duration = auth_token_duration
-    @auth_script_file = auth_script_file
-    @auth_headers = auth_headers
+    @skip_auth = opts['skip_auth']
+    @auth_token_duration = opts['auth_token_duration']
+    @auth_script_file = opts['auth_script_file']
+    @auth_headers = opts['auth_headers']
 
     # API files for openapi/swagger or postman
-    @api_files_dir = api_files_dir
+    @api_files_dir = opts['api_files_dir']
     allowed_api_types = {
+      none: "none",
       openapi: "openapi",
       swagger: "openapi",
       postman: "postman",
       graphql: "graphql"
     }
     # Validate that argument api_files_type is in allowed_api_types
-    @api_files_type = allowed_api_types[ api_files_type.downcase.to_sym ].nil? ? 'openapi' : allowed_api_types[ api_files_type.downcase.to_sym ]
+    @api_files_type = allowed_api_types[ opts['api_files_type'].downcase.to_sym ].nil? ? 'openapi' : allowed_api_types[ opts['api_files_type'].downcase.to_sym ]
 
 
     # Export Report files Locations
-    @output_dir = output_dir
-    @report_html = report_html
+    @output_dir = opts['output_dir']
+    @report_html = opts['report_html']
 
     # ZAP config
-    @zap_bin = zap_bin
-    @zap_port = zap_port
-    @zap_api_key = zap_api_key
-    @zap_host = zap_host
-    @zap_api_defs = zap_api_defs
-    @addons = addons
+    @zap_bin = opts['zap_bin']
+    @zap_port = opts['zap_port']
+    @zap_api_key = opts['zap_api_key']
+    @zap_host = opts['zap_host']
+    @zap_api_defs = opts['zap_api_defs']
+    @addons = opts['addons']
 
-    @zap_home_dir = File.expand_path( zap_home_dir )
+    @zap_home_dir = File.expand_path( opts['zap_home_dir'] )
     @auth_token_loop_thread = nil
     @findings = 0
 
@@ -91,7 +96,7 @@ class ZapScan
     ]
     dirs.each do |d|
       begin
-        FileUtils.cp_r( d, @zap_home_dir )
+        FileUtils.cp_r( d, @zap_home_dir ) if Dir.exist?( d )
       rescue => e
         raise e
       end
@@ -185,12 +190,48 @@ class ZapScan
   end
 
 
+  def spider_site( zap, ctx_id, api_host_url )
+
+    puts 'Spidering site.'
+
+    user = zap.users_usersList( contextId: ctx_id )['usersList'][0]
+
+    puts 'Running link spider'
+    if( @skip_auth )
+      zap.spider_scan( url: api_host_url, contextName: @context_name )
+    else
+      zap.spider_scanAsUser( url: api_host_url, contextId: ctx_id, userId: user['id']  )
+    end
+
+    puts 'Running AJAX spider. This may take up to 1 hour.'
+    zap.ajaxSpider_setOptionNumberOfBrowsers( Integer: 5 )
+    if( @skip_auth )
+      zap.ajaxSpider_scan( url: api_host_url, inScope: true, contextName: @context_name )
+    else
+      zap.ajaxSpider_scanAsUser( url: api_host_url, contextName: @context_name, userName: user['name'] )
+    end
+
+    # Display progress and block execution until spidering completes
+    numResults = zap.ajaxSpider_numberOfResults()['numberOfResults']
+    while( zap.ajaxSpider_status['status'] == 'running' || numResults == 0 )
+      numResults = zap.ajaxSpider_numberOfResults()['numberOfResults']
+      print "\rAjax Spider has found #{numResults} results"
+      STDOUT.flush
+      sleep 2
+    end
+
+    puts 'Spidering Complete'
+
+  end
+
+
   def get_api_host_url(zap, _ctx_id)
     
     target_host = ENV['TARGET_HOST']
     if not ENV.keys.include? 'TARGET_HOST' or target_host.empty?
       in_scope = zap.context_includeRegexs( contextName: @context_name )['includeRegexs']
-      target_host = in_scope[0]
+      # Zap will automatically add the regex .* to the end of the URL. Remove it for this variable.
+      target_host = in_scope[0][-2..] != '.*' ? in_scope[0] : in_scope[0][0..-3]
     else
       in_scope = zap.context_includeInContext( regex: target_host, contextName: @context_name )
     end
@@ -222,7 +263,7 @@ class ZapScan
       "sh"=> "bash"
     }
 
-    if File.exist?( @auth_script_file )
+    if @auth_script_file && File.exist?( @auth_script_file )
       valid_filename = /^[a-zA-Z0-9_-]+\.(#{cmds.keys.join('|')})$/
       if not valid_filename.match?( File.basename( @auth_script_file ) )
         return false
@@ -233,17 +274,17 @@ class ZapScan
       result = Open3.capture3( "#{cmds[auth_script_file_ext]} #{@auth_script_file}" )
       token = result[0].strip
 
-    else
+    # else
       # Get users in context
-      users = zap.users_usersList( contextId: ctx_id )['usersList']
-      auth_ctx = zap.authentication_getAuthenticationMethod( contextId: ctx_id )['method']
+      # users = zap.users_usersList( contextId: ctx_id )['usersList']
+      # auth_ctx = zap.authentication_getAuthenticationMethod( contextId: ctx_id )['method']
       
-      begin
-        token = get_auth_token( auth_ctx['loginUrl'], auth_ctx['loginRequestData'], users[0]['credentials'] )
-      rescue => e
-        pp e
-        raise 'There was a problem fetching the auth token. ZAP scan has been canceled.'
-      end
+      # begin
+      #   token = get_auth_token( auth_ctx['loginUrl'], auth_ctx['loginRequestData'], users[0]['credentials'] )
+      # rescue => e
+      #   pp e
+      #   raise 'There was a problem fetching the auth token. ZAP scan has been canceled.'
+      # end
     end
 
     @auth_headers.each do |hdr|
@@ -344,7 +385,13 @@ class ZapScan
 
     zap.ascan_enableAllScanners( scanPolicyName: @policy_name )
     
-    active_scan_id = zap.ascan_scan( contextId: ctx_id, scanPolicyName: @policy_name )
+    active_scan_id = 0
+    if( @skip_auth || @api_files_type != 'none' )
+      active_scan_id = zap.ascan_scan( contextId: ctx_id, scanPolicyName: @policy_name )
+    else
+      user = zap.users_usersList( contextId: ctx_id )['usersList'][0]
+      active_scan_id = zap.ascan_scanAsUser( contextId: ctx_id, scanPolicyName: @policy_name, userId: user['id'] )
+    end
 
     active_scan_id['scan']
 
@@ -508,9 +555,15 @@ class ZapScan
       end
     end
     
-    # Import swagger/openapi files (implicitly start passive scan)
+    # Enable passive scan
     zap.pscan_enableAllScanners
-    import_api_files( zap, api_host_url )
+    
+    if( @api_files_type == 'none' )
+      spider_site( zap, ctx_id, api_host_url )
+    else
+      # Import swagger/openapi files
+      import_api_files( zap, api_host_url )
+    end
 
     # Start active scan
     scan_id = active_scan(zap, ctx_id)
