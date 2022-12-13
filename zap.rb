@@ -25,7 +25,8 @@ class ZapScan
     skip_auth: false,
     auth_token_duration: 300,
     auth_script_file: '/home/repo/zap/auth.sh',
-    auth_headers: [{'header'=>'Authorization','value_prefix'=>'Bearer '}]
+    auth_headers: [{'header'=>'Authorization','value_prefix'=>'Bearer '}],
+    report_html: false
   )
 
     # project config
@@ -54,6 +55,7 @@ class ZapScan
 
     # Export Report files Locations
     @output_dir = output_dir
+    @report_html = report_html
 
     # ZAP config
     @zap_bin = zap_bin
@@ -228,11 +230,7 @@ class ZapScan
       
       auth_script_file_ext = File.extname( @auth_script_file )[1..-1]
 
-      if @auth_username or @auth_password
-        auth_args = " --username #{@auth_username} --password #{@auth_password}"
-      end
-
-      result = Open3.capture3( "#{cmds[auth_script_file_ext]} #{@auth_script_file} #{auth_args}" )
+      result = Open3.capture3( "#{cmds[auth_script_file_ext]} #{@auth_script_file}" )
       token = result[0].strip
 
     else
@@ -391,36 +389,40 @@ class ZapScan
 
   def write_reports( zap, output_dir )
   
-    puts 'Exporting reports'
+    puts 'Exporting report(s)'
     
     FileUtils.mkdir_p( 'eureka/reports' )
     timestamp = Time.now.strftime("%s")
     
-    # TODO: Add configurable severities and confidences to appear in report. The API offers these as params.
-    report_filename = "zap-report-#{timestamp}"
-    zap.reports_generate(
-      title: "ZAP Scanning Report - Modern",
-      template: "modern", #"risk-confidence-html",
-      theme: "marketing", #"original",
-      reportFileName: "#{report_filename}.html",
-      reportDir: @zap_home_dir,
-      display: "false"
-    )
-    # Zap can only write reports to it's home folder. This moves it to the proper output folder.
-    FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
-    FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
+    if @report_html == true
 
-    report_filename = "zap-risk-report-#{timestamp}"
-    zap.reports_generate(
-      title: "ZAP Scanning Report - Risk-Confidence",
-      template: "risk-confidence-html",
-      theme: "original",
-      reportFileName: "#{report_filename}.html",
-      reportDir: @zap_home_dir,
-      display: "false"
-    )
-    FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
-    FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
+      # TODO: Add configurable severities and confidences to appear in report. The API offers these as params.
+      report_filename = "zap-report-#{timestamp}"
+      zap.reports_generate(
+        title: "ZAP Scanning Report - Modern",
+        template: "modern", #"risk-confidence-html",
+        theme: "marketing", #"original",
+        reportFileName: "#{report_filename}.html",
+        reportDir: @zap_home_dir,
+        display: "false"
+      )
+      # Zap can only write reports to it's home folder. This moves it to the proper output folder.
+      FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
+      FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
+
+      report_filename = "zap-risk-report-#{timestamp}"
+      zap.reports_generate(
+        title: "ZAP Scanning Report - Risk-Confidence",
+        template: "risk-confidence-html",
+        theme: "original",
+        reportFileName: "#{report_filename}.html",
+        reportDir: @zap_home_dir,
+        display: "false"
+      )
+      FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
+      FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
+
+    end
 
     report_filename = "zap-report-#{timestamp}.json"
     zap.reports_generate(
