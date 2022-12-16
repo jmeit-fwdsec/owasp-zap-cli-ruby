@@ -16,11 +16,12 @@ class ZapScan
       'zap_host' => '127.0.0.1', # Using 'localhost' can sometimes default to ipv6, which doesn't work with Zap.
       'zap_port' => '8080',
       'zap_api_key' => '123456789',
-      'zap_home_dir' => '/home/repo/eureka/run/zap',
+      'zap_home_dir' => '/zap/wrk', # Default path for Zap's official Docker image
       'zap_api_defs' => "#{__dir__}/zap-api.json",
       'output_dir' => __dir__,
       'api_files_dir' => '/home/repo/zap/swagger',
       'api_files_type' => 'none', # Eureka default -> 'openapi'
+      'spider_max_duration' => 15, # Zap default is 60
       'policy_file' => '/home/repo/zap/zap.policy',
       'context_file' => '/home/repo/zap/zap.context',
       'addons' => [],
@@ -28,10 +29,12 @@ class ZapScan
       'auth_token_duration' => 300,
       'auth_script_file' => false, # Eureka default -> '/home/repo/zap/auth.sh'
       'auth_headers' => [], # Eureka default -> [{'header'=>'Authorization','value_prefix'=>'Bearer '}]
-      'report_html' => false
+      'report_html' => false,
+      'local_run' => false
     }
 
     opts = defaults.merge( opts )
+    @local_run = opts['local_run']
 
     # project config
     @policy_file = opts['policy_file']
@@ -56,6 +59,7 @@ class ZapScan
     }
     # Validate that argument api_files_type is in allowed_api_types
     @api_files_type = allowed_api_types[ opts['api_files_type'].downcase.to_sym ].nil? ? 'openapi' : allowed_api_types[ opts['api_files_type'].downcase.to_sym ]
+    @spider_max_duration = opts['spider_max_duration']
 
 
     # Export Report files Locations
@@ -70,7 +74,7 @@ class ZapScan
     @zap_api_defs = opts['zap_api_defs']
     @addons = opts['addons']
 
-    @zap_home_dir = File.expand_path( opts['zap_home_dir'] )
+    @zap_home_dir = opts['zap_home_dir']
     @auth_token_loop_thread = nil
     @findings = 0
 
@@ -87,8 +91,8 @@ class ZapScan
       'policies'=> @policy_file
     }
     files.each do |dir,file|
-      FileUtils.mkdir_p( "#{@zap_home_dir}/#{dir}" ) unless Dir.exist?( "#{@zap_home_dir}/#{dir}" )
-      FileUtils.copy_file( file, "#{@zap_home_dir}/#{dir}/#{File.basename(file)}" ) if File.exist?( file )
+      # FileUtils.mkdir_p( "#{@zap_home_dir}/#{dir}" ) unless Dir.exist?( "#{@zap_home_dir}/#{dir}" )
+      FileUtils.copy_file( file, "#{@zap_home_dir}/#{File.basename(file)}" ) if File.exist?( file )
     end
     
     dirs = [
@@ -205,6 +209,7 @@ class ZapScan
 
     puts 'Running AJAX spider. This may take up to 1 hour.'
     zap.ajaxSpider_setOptionNumberOfBrowsers( Integer: 5 )
+    zap.ajaxSpider_optionMaxDuration( Integer: @spider_max_duration )
     if( @skip_auth )
       zap.ajaxSpider_scan( url: api_host_url, inScope: true, contextName: @context_name )
     else
@@ -213,14 +218,14 @@ class ZapScan
 
     # Display progress and block execution until spidering completes
     numResults = zap.ajaxSpider_numberOfResults()['numberOfResults']
-    while( zap.ajaxSpider_status['status'] == 'running' || numResults == 0 )
+    while( zap.ajaxSpider_status['status'] == 'running' || numResults.to_i == 0 )
       numResults = zap.ajaxSpider_numberOfResults()['numberOfResults']
       print "\rAjax Spider has found #{numResults} results"
       STDOUT.flush
       sleep 2
     end
 
-    puts 'Spidering Complete'
+    puts "\nSpidering completed and found #{numResults} results"
 
   end
 
@@ -231,7 +236,7 @@ class ZapScan
     if not ENV.keys.include? 'TARGET_HOST' or target_host.empty?
       in_scope = zap.context_includeRegexs( contextName: @context_name )['includeRegexs']
       # Zap will automatically add the regex .* to the end of the URL. Remove it for this variable.
-      target_host = in_scope[0][-2..] != '.*' ? in_scope[0] : in_scope[0][0..-3]
+      target_host = in_scope[0].chars.last(2).join != '.*' ? in_scope[0] : in_scope[0][0..-3]
     else
       in_scope = zap.context_includeInContext( regex: target_host, contextName: @context_name )
     end
@@ -247,7 +252,7 @@ class ZapScan
 
     zap.context_removeContext( contextName: @context_name )
     
-    ctx = zap.context_importContext( contextFile: "#{@zap_home_dir}/contexts/#{File.basename(@context_file)}" )
+    ctx = zap.context_importContext( contextFile: "#{@zap_home_dir}/#{File.basename(@context_file)}" )
     
     ctx['contextId']
 
@@ -381,7 +386,7 @@ class ZapScan
 
     if File.exist?( @policy_file )
       puts( "Importing Policy: #{@policy_name}" )
-      zap.ascan_importScanPolicy( path: "#{@zap_home_dir}/policies/#{File.basename(@policy_file)}" )
+      zap.ascan_importScanPolicy( path: "#{@zap_home_dir}/#{File.basename(@policy_file)}" )
     end
 
     zap.ascan_enableAllScanners( scanPolicyName: @policy_name )
@@ -534,10 +539,12 @@ class ZapScan
       return quit_zap [ "build_zap", e ]
     end
 
-    begin
-      move_files_to_zap_home
-    rescue => e
-      return quit_zap [ "Missing swagger files directory named in salus.yaml file or default location.", e ]
+    if( @local_run )
+      begin
+        move_files_to_zap_home
+      rescue => e
+        return quit_zap [ "Missing swagger files directory named in salus.yaml file or default location.", e ]
+      end
     end
 
     ctx_id = build_context( zap )

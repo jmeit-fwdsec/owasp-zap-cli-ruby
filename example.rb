@@ -11,7 +11,8 @@ zap = ZapScan.new(
         'zap_home_dir' => '/private/tmp', #"#{__dir__}/eureka/zap/home",
         'zap_api_key' => 'cs5pvv51qmcp3srlenbs7kms3b', 
         'zap_port' => '8081',
-        'output_dir' => "#{__dir__}/eureka/reports"
+        'output_dir' => "#{__dir__}/eureka/reports",
+        'local_run' => true
     }.merge( zap_config )
 )
 zap.start

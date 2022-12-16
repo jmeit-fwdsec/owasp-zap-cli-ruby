@@ -22,6 +22,10 @@
                 {
                     "name": "hrefId",
                     "required": true
+                },
+                {
+                    "name": "actionUrl",
+                    "required": false
                 }
             ],
             "type": "other"
@@ -4292,6 +4296,40 @@
         }
     },
     "exim": {
+        "exportHar": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "baseurl",
+                    "required": false
+                },
+                {
+                    "name": "start",
+                    "required": false
+                },
+                {
+                    "name": "count",
+                    "required": false
+                }
+            ],
+            "type": "other"
+        },
+        "exportHarById": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "ids",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
         "importHar": {
             "params": [
                 {
@@ -4343,6 +4381,23 @@
                 }
             ],
             "type": "action"
+        },
+        "sendHarRequest": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "request",
+                    "required": true
+                },
+                {
+                    "name": "followRedirects",
+                    "required": false
+                }
+            ],
+            "type": "other"
         }
     },
     "forcedUser": {
@@ -5132,19 +5187,6 @@
             ],
             "type": "action"
         },
-        "setOptionEnableTelemetry": {
-            "params": [
-                {
-                    "name": "apikey",
-                    "required": true
-                },
-                {
-                    "name": "Boolean",
-                    "required": true
-                }
-            ],
-            "type": "action"
-        },
         "setOptionEnabledForDaemon": {
             "params": [
                 {
@@ -5386,6 +5428,115 @@
         }
     },
     "network": {
+        "addAlias": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addHttpProxyExclusion": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "host",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addLocalServer": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "required": true
+                },
+                {
+                    "name": "api",
+                    "required": false
+                },
+                {
+                    "name": "proxy",
+                    "required": false
+                },
+                {
+                    "name": "behindNat",
+                    "required": false
+                },
+                {
+                    "name": "decodeResponse",
+                    "required": false
+                },
+                {
+                    "name": "removeAcceptEncoding",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addPassThrough": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "authority",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "addPkcs12ClientCertificate": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "filePath",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "required": true
+                },
+                {
+                    "name": "index",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
         "generateRootCaCert": {
             "params": [
                 {
@@ -5394,6 +5545,105 @@
                 }
             ],
             "type": "action"
+        },
+        "getAliases": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getConnectionTimeout": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getDefaultUserAgent": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getDnsTtlSuccessfulQueries": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getHttpProxy": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getHttpProxyExclusions": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getLocalServers": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getPassThroughs": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getRootCaCertValidity": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getServerCertValidity": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "getSocksProxy": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
         },
         "importRootCaCert": {
             "params": [
@@ -5408,6 +5658,107 @@
             ],
             "type": "action"
         },
+        "isHttpProxyAuthEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "isHttpProxyEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "isSocksProxyEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "isUseGlobalHttpState": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "proxy.pac": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
+        "removeAlias": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeHttpProxyExclusion": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "host",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removeLocalServer": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "removePassThrough": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "authority",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
         "rootCaCert": {
             "params": [
                 {
@@ -5416,6 +5767,262 @@
                 }
             ],
             "type": "other"
+        },
+        "setAliasEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setConnectionTimeout": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "timeout",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setDefaultUserAgent": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "userAgent",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setDnsTtlSuccessfulQueries": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "ttl",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setHttpProxy": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "host",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "required": true
+                },
+                {
+                    "name": "realm",
+                    "required": false
+                },
+                {
+                    "name": "username",
+                    "required": false
+                },
+                {
+                    "name": "password",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setHttpProxyAuthEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setHttpProxyEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setHttpProxyExclusionEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "host",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setPassThroughEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "authority",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setProxy": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "proxy",
+                    "required": true
+                }
+            ],
+            "type": "other"
+        },
+        "setRootCaCertValidity": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "validity",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setServerCertValidity": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "validity",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setSocksProxy": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "host",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "required": true
+                },
+                {
+                    "name": "version",
+                    "required": false
+                },
+                {
+                    "name": "useDns",
+                    "required": false
+                },
+                {
+                    "name": "username",
+                    "required": false
+                },
+                {
+                    "name": "password",
+                    "required": false
+                }
+            ],
+            "type": "action"
+        },
+        "setSocksProxyEnabled": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "enabled",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setUseClientCertificate": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "use",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
+        "setUseGlobalHttpState": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "use",
+                    "required": true
+                }
+            ],
+            "type": "action"
         }
     },
     "openapi": {
@@ -5478,7 +6085,25 @@
         }
     },
     "pscan": {
+        "clearQueue": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "action"
+        },
         "currentRule": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
+        "currentTasks": {
             "params": [
                 {
                     "name": "apikey",
@@ -5686,6 +6311,10 @@
                 },
                 {
                     "name": "initiators",
+                    "required": false
+                },
+                {
+                    "name": "url",
                     "required": false
                 }
             ],
@@ -6568,6 +7197,15 @@
             ],
             "type": "view"
         },
+        "optionChromeBinaryPath": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                }
+            ],
+            "type": "view"
+        },
         "optionChromeDriverPath": {
             "params": [
                 {
@@ -6621,6 +7259,19 @@
                 }
             ],
             "type": "view"
+        },
+        "setOptionChromeBinaryPath": {
+            "params": [
+                {
+                    "name": "apikey",
+                    "required": true
+                },
+                {
+                    "name": "String",
+                    "required": true
+                }
+            ],
+            "type": "action"
         },
         "setOptionChromeDriverPath": {
             "params": [
@@ -7089,24 +7740,6 @@
             ],
             "type": "view"
         },
-        "optionScope": {
-            "params": [
-                {
-                    "name": "apikey",
-                    "required": true
-                }
-            ],
-            "type": "view"
-        },
-        "optionScopeText": {
-            "params": [
-                {
-                    "name": "apikey",
-                    "required": true
-                }
-            ],
-            "type": "view"
-        },
         "optionSendRefererHeader": {
             "params": [
                 {
@@ -7518,19 +8151,6 @@
                 },
                 {
                     "name": "Integer",
-                    "required": true
-                }
-            ],
-            "type": "action"
-        },
-        "setOptionScopeString": {
-            "params": [
-                {
-                    "name": "apikey",
-                    "required": true
-                },
-                {
-                    "name": "String",
                     "required": true
                 }
             ],
