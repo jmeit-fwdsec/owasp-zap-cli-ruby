@@ -7,5 +7,6 @@
           "useBundler": true // enable rubocop via bundler
         }
       },
-      "ruby.intellisense": "rubyLocate"
+      "ruby.intellisense": "rubyLocate",
+      "sarif-viewer.connectToGithubCodeScanning": "off"
 }

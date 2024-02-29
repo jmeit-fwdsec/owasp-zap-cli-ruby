@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Local File",
-            "type": "Ruby",
+            "type": "ruby_lsp",
             "request": "launch",
-            "program": "${workspaceRoot}/example.rb"
+            "name": "Debug program",
+            "program": "ruby ${workspaceRoot}/example.rb"
         }
     ]
 }

@@ -16,7 +16,9 @@ class ZapScan
       'zap_host' => '127.0.0.1', # Using 'localhost' can sometimes default to ipv6, which doesn't work with Zap.
       'zap_port' => '8080',
       'zap_api_key' => '123456789',
-      'zap_home_dir' => '/zap/wrk', # Default path for Zap's official Docker image
+      'zap_home_dir' => '',
+      'zap_scripts_dir' => '/home/repo/zap/scripts',
+      'zap_home_dir_external' => '/home/repo/.ZAP',
       'zap_api_defs' => "#{__dir__}/zap-api.json",
       'output_dir' => __dir__,
       'api_files_dir' => '/home/repo/zap/swagger',
@@ -74,7 +76,9 @@ class ZapScan
     @zap_api_defs = opts['zap_api_defs']
     @addons = opts['addons']
 
+    @zap_scripts_dir = opts['zap_scripts_dir']
     @zap_home_dir = opts['zap_home_dir']
+    @zap_home_dir_external = opts['zap_home_dir_external']
     @auth_token_loop_thread = nil
     @findings = 0
 
@@ -92,15 +96,21 @@ class ZapScan
     }
     files.each do |dir,file|
       # FileUtils.mkdir_p( "#{@zap_home_dir}/#{dir}" ) unless Dir.exist?( "#{@zap_home_dir}/#{dir}" )
-      FileUtils.copy_file( file, "#{@zap_home_dir}/#{File.basename(file)}" ) if File.exist?( file )
+      FileUtils.copy_file( file, "#{@zap_home_dir_external}/#{File.basename(file)}" ) if File.exist?( file )
     end
     
     dirs = [
-      @api_files_dir
+      @api_files_dir,
+      @zap_scripts_dir
     ]
     dirs.each do |d|
+      if d == @zap_scripts_dir
+        dest_dir = "#{@zap_home_dir_external}/scripts"
+      else
+        dest_dir = @zap_home_dir_external
+      end
       begin
-        FileUtils.cp_r( d, @zap_home_dir ) if Dir.exist?( d )
+        FileUtils.cp_r( d, dest_dir ) if Dir.exist?( d )
       rescue => e
         raise e
       end
@@ -110,7 +120,7 @@ class ZapScan
 
   def import_api_files(zap, api_url)
     
-    api_files = Dir.glob( "#{@zap_home_dir}/#{File.basename(@api_files_dir)}/**/*.{json,yaml,yml,graphql,schema}" )
+    api_files = Dir.glob( "#{@zap_home_dir_external}/#{File.basename(@api_files_dir)}/**/*.{json,yaml,yml,graphql,schema}" )
     
     if @api_files_type == 'postman'
       import_postman( zap, api_url, api_files )
@@ -362,7 +372,7 @@ class ZapScan
       raise e
     end
 
-    @zap_home_dir = zap.core_homeDirectory['homeDirectory'] if @zap_home_dir == ''
+    @zap_home_dir = zap.core_zapHomePath['zapHomePath']
 
     install_addons zap
     
@@ -377,6 +387,36 @@ class ZapScan
       puts "Installing addon: #{addon}"
       zap.autoupdate_installAddon( id: addon )
     end
+  end
+
+
+  def load_scripts( zap )
+
+    zap_auth_script_exists = false
+
+    script_category_dirs = Dir.glob( "#{@zap_scripts_dir}/*" )
+    
+    script_category_dirs.each do |scripts_category|
+
+      scripts_category = File.basename( scripts_category )
+      scripts = Dir.glob( "#{@zap_scripts_dir}/#{scripts_category}/**/*.js" )
+
+      scripts.each do |script|
+
+        script = File.basename( script )
+        scripts_category = scripts_category.downcase().gsub(/[^a-z]/, '')
+        if scripts_category == "authentication"
+          zap_auth_script_exists = true
+        end
+        
+        puts "Loading script: #{script}"
+        zap.script_load( scriptName: script, scriptType: scripts_category, scriptEngine: "ECMAScript : Graal.js", fileName: "#{@zap_home_dir}/scripts/scripts/#{scripts_category}/#{script}" )
+      
+      end
+
+    end
+
+    return zap_auth_script_exists
   end
 
 
@@ -459,9 +499,6 @@ class ZapScan
         reportDir: @zap_home_dir,
         display: "false"
       )
-      # Zap can only write reports to it's home folder. This moves it to the proper output folder.
-      FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
-      FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
 
       report_filename = "zap-risk-report-#{timestamp}"
       zap.reports_generate(
@@ -472,8 +509,6 @@ class ZapScan
         reportDir: @zap_home_dir,
         display: "false"
       )
-      FileUtils.move( "#{@zap_home_dir}/#{report_filename}.html", "#{output_dir}/#{report_filename}.html" )
-      FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
 
     end
 
@@ -485,7 +520,6 @@ class ZapScan
       reportDir: @zap_home_dir,
       display: "false"
     )
-    FileUtils.move( "#{@zap_home_dir}/#{report_filename}", "#{output_dir}/#{report_filename}" )
 
     puts 'Done.'
   end
@@ -547,6 +581,8 @@ class ZapScan
       end
     end
 
+    zap_auth_script_exists = load_scripts zap
+
     ctx_id = build_context( zap )
 
     api_host_url = get_api_host_url( zap, ctx_id )
@@ -555,7 +591,7 @@ class ZapScan
     zap.core_deleteSiteNode( url: api_host_url )
     
     # Get auth token
-    if not @skip_auth
+    if not @skip_auth and not zap_auth_script_exists
       begin
         @auth_token_loop_thread = auth_token_loop(zap, ctx_id)
       rescue => e
